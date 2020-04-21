@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html  ng-app = "testApp">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="home.css">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+<script src="https://kit.fontawesome.com/741f866fd7.js" crossorigin="anonymous"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+    angular.module('testApp', [])
+  .controller('MainCtrl', function($scope) {
+    $scope.cardInfo = { title:"Engagement Process",
+                        status : "Abandoned",
+                        text: "2019 Fall Oncology Advisory Board"}
+    $scope.values = [{
+                        step:1,
+                        title:"Draft",
+                        text:"Created on",
+                        date:"01/31/2020",
+                        status:"done"
+                    },
+                    {
+                        step:2,
+                        title:"Pending Approval",
+                        text:"Approval sent",
+                        date:"02/14/2020",
+                        status:"done"
+                    },
+                    {
+                        step:3,
+                        title:"Approved",
+                        text:"Abandoned on",
+                        date:"02/20/2020",
+                        status:"pending"
+                    },
+                    {
+                        step:4,
+                        title:"Execute",
+                        status:"open"
+                    },
+                    {
+                        step:5,
+                        title:"Concluded",
+                        status:"open"
+                    },
+                    {
+                        step:6,
+                        title:"Closed"
+                     
+                    }
+                ];
+
+  })
+</script>
+
+</head>
+<body>
+
+<h2>IQVIA Apollo Gemini Front End Developer UI Test</h2>
+
+<!-- Trigger/Open The Modal -->
+<button id="myBtn">Open Modal</button>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" ng-controller = "MainCtrl">
+
+  <!-- Modal content -->
+  <div class="modal-content ">
+      <div class = "row">
+        <div class = "col-sm-11">
+            <div class = "row title">
+                <div class = "col-sm-3 card-title">
+                    <strong>  {{cardInfo.title}} </strong>
+                </div>
+                <div class = "col-sm-3" >
+                    <span class="card-status">
+                        {{cardInfo.status}}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <span class=" col-sm-1 close">&times;</span>
+        </div>
+      </div>
+    <span class = "card-text">{{cardInfo.text}}</span>
+    
+    <div class ="flex">
+        <div ng-repeat="item in values">
+            <div class = "option">
+                <span ng-if="item.status != 'done'" class = "step">{{item.step}}</span>
+                <span ng-if="item.status == 'done'" class = "step-check"><i class="fas fa-check"></i></span>
+                <br>
+                    <div class = "step-name">{{item.title}}</div>
+                <br>
+                <div class = "step-text">
+                    {{item.text}}&nbsp;
+                </div>
+                <br>
+                <div class ="step-date"> 
+                    {{item.date}}
+                    &nbsp;
+                </div>
+            </div>           
+            <div ng-if= "$index != values.length -1" class = "right-line">
+                ______
+            </div>
+            <div ng-if = "$index != 0 && $index != values.length -1" class = "right-line-odd">
+                ______
+            </div>
+
+            <div ng-if = "$index == values.length -1 " class ="left-line">
+                ______
+            </div>
+        </div>
+        
+
+    </div>
+    <div class = "footer">
+        <button class="btn btn-primary btn-reinstate"   type="button">Reinstate</button>
+        <button class="btn btn-primary btn-draft"   type="button">Draft Revisions</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Get the modal https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+  modal.style.display = "block";
+  modal.classList.add("showModal");
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.classList.remove("showModal");
+    modal.style.display = "none";
+  
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.classList.remove("showModal");
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
